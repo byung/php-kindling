@@ -1,0 +1,37 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{REQUEST_URI} (.*)/$
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule (.*)/$ $1.html [L]
+
+RewriteCond %{REQUEST_URI} (.*)/$
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule (.*)/$ $1.php [L]
+
+RewriteCond %{REQUEST_URI} (.*)/$
+RewriteCond %{REQUEST_FILENAME}\.cgi -f
+RewriteRule (.*)/$ $1.cgi [L]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f [OR]
+RewriteCond %{REQUEST_FILENAME}\.php -f [OR]
+RewriteCond %{REQUEST_FILENAME}\.cgi -f
+RewriteRule .* %{REQUEST_FILENAME}/ [R=301,L]
+</IfModule>
+
+RewriteCond %{HTTPS} =on
+RewriteRule ^(.*)$ http://%{HTTP_HOST}/$1 [L,R=301]
+ 
+RewriteBase /
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+
+AddOutputFilterByType DEFLATE text/plain
+AddOutputFilterByType DEFLATE text/html
+AddOutputFilterByType DEFLATE text/xml
+AddOutputFilterByType DEFLATE text/css
+AddOutputFilterByType DEFLATE application/xml
+AddOutputFilterByType DEFLATE application/xhtml+xml
+AddOutputFilterByType DEFLATE application/rss+xml
+AddOutputFilterByType DEFLATE application/javascript
+AddOutputFilterByType DEFLATE application/x-javascript
