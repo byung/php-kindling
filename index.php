@@ -15,7 +15,7 @@ $description ="";
 				
 				<!--Page Content-->
 				<article>
-					
+					Hello
 				</article>
 
 				<!--Sidebar-->
